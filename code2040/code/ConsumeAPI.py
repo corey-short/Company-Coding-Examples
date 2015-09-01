@@ -1,13 +1,13 @@
-__author__ = 'Short'
+__author__ = 'Corey Short'
+__date__ = '08/1/15'
 
 import json
 import requests
 import ast
 
 
-class APIChallenge:
+class ConsumeAPI:
     # This is still not finished.
-    # Where are all the magical comments and exceptions at? You should add them sir.
     def __init__(self):
         self.headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         self.token = None
@@ -15,8 +15,11 @@ class APIChallenge:
     def register(self):
         # Send registration request
         url = 'http://challenge.code2040.org/api/register'
+        # A JSON dict with the keys email and github sent in the body of our request
         data = {'email': 'cshort012@gmail.com', 'github': 'http://github.com/cshort12/code2040'}
+        print data
         self.token = self.post(url, data)
+        print self.token
 
     def post(self, url, data):
         # Should be using try except. what if the response is bad :(
@@ -25,7 +28,7 @@ class APIChallenge:
         return response
 
     def parse_response(self, response):
-        # This is soooo Hacky. Should use regex
+        # This is Hacky. Should use regex
         parsed_response = response.split(":")[1].split("}")[0].replace('"', '')
         return parsed_response
 
